@@ -621,6 +621,14 @@ p, li, .about p, .engagements p, .story-intro, .story-qa .a, .founder-lead, .fou
 .form-status { margin-top: .85rem; font-size: .95rem; }
 .form-status--success { color: var(--green-dark); }
 .form-status--error { color: #c0392b; }
+.contact-form .botcheck {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
 
 .hero-card-band {
   background: linear-gradient(108deg, var(--navy-deep) 0%, #16265f 40%, #46528a 66%, #cfd2de 88%, #f4f5f8 100%);

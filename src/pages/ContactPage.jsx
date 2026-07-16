@@ -43,6 +43,13 @@ export function ContactPage() {
     const company = String(formData.get('company') || '').trim();
     const interest = String(formData.get('interest') || '').trim();
     const message = String(formData.get('message') || '').trim();
+    const botcheck = String(formData.get('botcheck') || '');
+
+    if (botcheck) {
+      setStatus({ message: "Thank you — your message was sent. We'll be in touch soon.", type: 'success' });
+      form.reset();
+      return;
+    }
 
     const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
     if (!accessKey) {
@@ -50,6 +57,11 @@ export function ContactPage() {
         message: 'Contact form is not configured yet. Please email marketing@inselbergsolutions.com or call +91 6362 134276.',
         type: 'error'
       });
+      return;
+    }
+
+    if (!name || !email) {
+      setStatus({ message: 'Please enter your name and work email.', type: 'error' });
       return;
     }
 
@@ -67,6 +79,7 @@ export function ContactPage() {
           access_key: accessKey,
           name,
           email,
+          from_name: 'Inselberg Website',
           botcheck: '',
           subject: interest ? `Inselberg inquiry: ${interest}` : 'Inselberg website contact form',
           company,
@@ -83,7 +96,10 @@ export function ContactPage() {
       setStatus({ message: "Thank you — your message was sent. We'll be in touch soon.", type: 'success' });
       setTimeout(() => setSent(false), 4000);
     } catch (error) {
-      setStatus({ message: error.message || 'Unable to send message. Please try again.', type: 'error' });
+      setStatus({
+        message: error.message || 'Something went wrong. Please email marketing@inselbergsolutions.com or try again later.',
+        type: 'error'
+      });
     } finally {
       setSending(false);
     }
@@ -130,6 +146,14 @@ export function ContactPage() {
             </div>
 
             <form id="contact-form" className="contact-form" onSubmit={onSubmit} noValidate>
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="botcheck"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
               <div className="form-field">
                 <label htmlFor="cf-name">Name</label>
                 <input id="cf-name" name="name" type="text" autoComplete="name" required />
@@ -165,7 +189,9 @@ export function ContactPage() {
                 {sending ? 'Sending...' : sent ? 'Message Sent' : 'Request Private Demo'}
               </button>
               {status.message ? (
-                <p className={`form-status form-status--${status.type}`}>{status.message}</p>
+                <p className={`form-status form-status--${status.type}`} role="status" aria-live="polite">
+                  {status.message}
+                </p>
               ) : null}
             </form>
           </div>
