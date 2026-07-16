@@ -83,6 +83,196 @@ h1 .accent, h2 .accent, h3 .accent, h4 .accent {
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  background: var(--gradient-header);
+  backdrop-filter: saturate(1.1);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 10px 30px rgba(5,17,58,.18);
+  transition: box-shadow var(--transition), background var(--transition);
+}
+.site-header::after { display: none; }
+.site-header.scrolled { box-shadow: 0 10px 30px rgba(5,17,58,.22); }
+.nav-inner {
+  width: calc(100% - clamp(2rem, 6vw, 4rem));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: var(--nav-h);
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: #fff;
+  font-family: var(--font);
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: none;
+}
+.logo:hover { color: #fff; }
+.logo-icon {
+  width: 28px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  background: transparent;
+  line-height: 0;
+}
+.logo-icon svg,
+.logo-icon .logo-mark {
+  width: 28px;
+  height: auto;
+  display: block;
+  shape-rendering: geometricPrecision;
+}
+.footer-brand .logo-icon { color: var(--navy); }
+.footer-brand .logo-icon svg,
+.footer-brand .logo-icon .logo-mark { width: 100%; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(.85rem, 1.8vw, 1.65rem);
+}
+.nav-links a {
+  position: relative;
+  color: rgba(255,255,255,.82);
+  font-family: var(--font);
+  font-size: .84rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .55rem .1rem;
+  transition: color .25s ease;
+}
+.nav-links a:hover,
+.nav-links a.active { color: #fff; }
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: .15rem;
+  height: 1px;
+  background: rgba(255,255,255,.92);
+  border-radius: 999px;
+}
+.nav-links a.nav-cta.active::after { display: none !important; }
+
+.nav-dropdown {
+  position: relative; z-index: 1200;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+}
+.nav-dropdown > a {
+  color: rgba(255,255,255,.82);
+  font-size: .84rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: .55rem .1rem;
+}
+.nav-dropdown > a:hover { color: #fff; }
+.nav-dropdown > a::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-top: 2px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid rgba(255,255,255,.75);
+}
+.nav-dropdown > a:hover::after { border-top-color: #fff; }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 18px); left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 280px;
+  background: rgba(255,255,255,.98);
+  border-radius: 14px;
+  box-shadow: 0 22px 50px rgba(11,26,77,.18);
+  padding: .55rem;
+  opacity: 0; visibility: hidden;
+  z-index: 1200;
+  transition: all var(--transition);
+  border: 1px solid rgba(226,232,240,.95);
+}
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu a {
+  display: block; padding: 0.65rem 1rem;
+  color: var(--text); font-size: 0.875rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+.dropdown-menu a:hover { background: var(--bg-soft); color: var(--purple); }
+
+.nav-cta {
+  margin-left: .35rem;
+  padding: .62rem 1.05rem !important;
+  background: rgba(255,255,255,.08) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 999px;
+  font-weight: 600 !important;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-shadow: none;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+.nav-cta:hover {
+  background: #fff !important;
+  border-color: #fff;
+  color: var(--navy-deep) !important;
+  transform: translateY(-1px);
+}
+.nav-cta-arrow {
+  display: inline-block;
+  margin-left: .35rem;
+  font-weight: 500;
+}
+
+.menu-toggle {
+  font-family: var(--font);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--blue); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--blue-dark); }
+ul { list-style: none; }
+
+/* Brand gradient text fill (indigo -> teal -> green) - client uses this on
+   accent words inside headings. Apply to a <span> around the accent word. */
+.grad-text,
+h1 .accent, h2 .accent, h3 .accent, h4 .accent {
+  background: linear-gradient(95deg, #4b46cf 0%, #3b6fc0 30%, #2f93a8 55%, #49a98a 72%, #7cc06b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* keep crisp on webkit */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.container { width: min(1200px, 92vw); margin: 0 auto; }
+.container-wide { width: min(1400px, 94vw); margin: 0 auto; }
+
+/*  Navigation  */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
   background: var(--gradient-header);
   border-bottom: none;
   transition: box-shadow var(--transition), background var(--transition);
@@ -2034,15 +2224,15 @@ body.pdf-exporting {
 
   .menu-toggle { display: block; z-index: 1001; }
 
-  /* Site header � edge padding & alignment */
-  .site-header .container.nav-inner {
-    width: 100%;
+  /* Site header edge padding & alignment */
+  .site-header .nav-inner {
+    width: calc(100% - 2rem);
     max-width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0;
+    padding-right: 0;
   }
   .logo { font-size: 1.1rem; min-width: 0; }
-  .logo-icon { width: 36px; height: 25px; }
+  .logo-icon { width: 28px; height: auto; }
 
   /* Page containers */
   .container,
