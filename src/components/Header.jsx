@@ -55,12 +55,13 @@ export function Header({ currentPath, navigate }) {
             type="button"
             className={`${item.cta ? 'nav-cta' : ''} ${isActive(currentPath, item.href) ? 'active' : ''}`}
             onClick={() => {
-              if (item.children && open) {
+              if (item.children && isMobile) {
                 setExpanded((current) => (current === item.label ? null : item.label));
                 return;
               }
               onNavigate(item.href);
             }}
+            aria-expanded={item.children ? expanded === item.label : undefined}
           >
             {item.label}
             {item.cta ? <span className="nav-cta-arrow" aria-hidden="true">→</span> : null}
