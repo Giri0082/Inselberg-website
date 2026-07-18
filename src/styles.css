@@ -91,7 +91,6 @@ p, li, .about p, .engagements p, .story-intro, .story-qa .a, .founder-lead, .fou
   display: flex;
   align-items: center;
   background: var(--header-gradient);
-  backdrop-filter: saturate(1.1);
   border-bottom: 1px solid rgba(255,255,255,.06);
   box-shadow: 0 10px 30px rgba(5,17,58,.18);
 }
@@ -901,10 +900,18 @@ p, li, .about p, .engagements p, .story-intro, .story-qa .a, .founder-lead, .fou
 }
 
 @media (max-width: 760px) {
-  body.nav-open { overflow: hidden; }
+  body.nav-open { overflow: hidden; touch-action: none; }
 
   .container { width: min(1180px, 92vw); }
   .section { padding: clamp(1.8rem, 5vw, 2.4rem) 0; }
+
+  .site-header {
+    overflow: visible;
+  }
+  .nav-inner {
+    position: relative;
+    z-index: 60;
+  }
 
   .menu-toggle {
     display: flex;
@@ -913,6 +920,7 @@ p, li, .about p, .engagements p, .story-intro, .story-qa .a, .founder-lead, .fou
     align-items: center;
     justify-content: center;
     gap: 5px;
+    z-index: 61;
   }
   .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .menu-toggle.active span:nth-child(2) { opacity: 0; }
@@ -921,22 +929,38 @@ p, li, .about p, .engagements p, .story-intro, .story-qa .a, .founder-lead, .fou
 
   .nav-links {
     position: fixed;
-    inset: var(--nav-h) 0 0 0;
-    display: block;
-    padding: 1rem 6vw 2rem;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 55;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    height: calc(100vh - var(--nav-h));
+    height: calc(100dvh - var(--nav-h));
+    max-height: calc(100dvh - var(--nav-h));
+    margin: 0;
+    padding: 1rem 6vw calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background: linear-gradient(180deg, #05113a 0%, #101f54 55%, #16265f 100%);
-    transform: translateY(-110%);
-    opacity: 0;
+    transform: translateX(100%);
+    opacity: 1;
+    visibility: hidden;
     pointer-events: none;
-    transition: transform .28s ease, opacity .28s ease;
+    transition: transform .28s ease, visibility .28s ease;
   }
   .nav-links.open {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
     pointer-events: auto;
   }
   .nav-item, .nav-dropdown {
+    flex: 0 0 auto;
     padding: .2rem 0;
     border-bottom: 1px solid rgba(255,255,255,.12);
   }
