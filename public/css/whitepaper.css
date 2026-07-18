@@ -2275,6 +2275,18 @@ body.pdf-exporting {
   }
   .article-body {
     padding: 2rem 1.125rem 3.5rem;
+    max-width: 100%;
+  }
+  .article-body p,
+  .article-body li {
+    max-width: none;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+  .article-body h2 {
+    margin: 1.75rem 0 .85rem;
+    line-height: 1.25;
   }
 
   /* Stack text + image sections */
