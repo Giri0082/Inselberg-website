@@ -893,7 +893,21 @@ p, li, .about p, .engagements p, .story-intro, .story-qa .a, .founder-lead, .fou
   .solution-hero-inner, .feature-grid, .capability-grid, .process-grid, .architecture-row { grid-template-columns: 1fr 1fr; }
   .story-media-grid { grid-template-columns: 1fr; }
   .story-media-grid img { max-width: 360px; justify-self: start; }
+  .site-footer {
+    background: linear-gradient(180deg, var(--navy-deep) 0%, #101f54 55%, #16265f 100%);
+  }
   .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .footer-col-dark h4,
+  .footer-col-dark button,
+  .footer-col-dark a {
+    color: rgba(255, 255, 255, .88);
+  }
+  .footer-col-dark h4 { color: #fff; }
+  .solution-tabs {
+    width: min(1180px, 92vw);
+    gap: clamp(1rem, 4vw, 2.5rem);
+    justify-content: space-between;
+  }
   .founder-grid, .wp-grid, .customer-story, .contact-grid { grid-template-columns: 1fr 1fr; }
   .founder-card { border-left: 0; border-right: 0; padding: 0 0 1.5rem; }
   .founder-card + .founder-card { border-top: 1px solid rgba(90, 148, 210, .35); padding-top: 1.5rem; }
@@ -1174,15 +1188,24 @@ p, li, .about p, .engagements p, .story-intro, .story-qa .a, .founder-lead, .fou
   .contact-grid { grid-template-columns: 1fr; }
 
   .solution-tabs {
-    gap: .85rem;
-    padding: .85rem 4vw;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    width: 92vw;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: .15rem 0 .85rem;
+    overflow: visible;
   }
   .solution-tabs button {
-    flex: 0 0 auto;
-    min-height: 40px;
-    white-space: nowrap;
+    min-width: 0;
+    min-height: 2.75rem;
+    padding: .45rem .35rem;
+    font-size: .78rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .solution-hero-inner { width: 92vw; gap: 1.1rem; }
   .solution-hero h1 { max-width: none; font-size: clamp(1.55rem, 7vw, 2.1rem); }
