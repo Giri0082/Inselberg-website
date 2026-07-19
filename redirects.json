@@ -1,0 +1,50 @@
+[
+  {
+    "source": "/sitemap.xml",
+    "target": "/sitemap.xml",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/robots.txt",
+    "target": "/robots.txt",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/llms.txt",
+    "target": "/llms.txt",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/whitepapers/<*>",
+    "target": "/whitepapers/<*>",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/assets/<*>",
+    "target": "/assets/<*>",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/css/<*>",
+    "target": "/css/<*>",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "/js/<*>",
+    "target": "/js/<*>",
+    "status": "200",
+    "condition": null
+  },
+  {
+    "source": "</^[^.]+$|\\.(?!(css|gif|ico|jpg|jpeg|js|png|txt|svg|woff|woff2|ttf|map|json|webp|avif|html|xml)$)([^.]+$)/>",
+    "target": "/index.html",
+    "status": "200",
+    "condition": null
+  }
+]

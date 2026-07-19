@@ -1,0 +1,29 @@
+# Inselberg — crawl & discovery
+User-agent: *
+Allow: /
+
+# AI / LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemaps & machine-readable site map for LLMs
+Sitemap: https://inselbergsolutions.com/sitemap.xml
+Sitemap: https://inselbergsolutions.com/llms.txt

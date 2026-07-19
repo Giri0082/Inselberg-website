@@ -6,9 +6,7 @@ export const navItems = [
     children: [
       { label: 'Wealth Management', href: '/wealth-managers' },
       { label: 'Asset Management', href: '/asset-managers' },
-      { label: 'Banks & Lenders', href: '/banks-lenders' },
-      { label: 'Governance & Regulatory Operations', href: '/#governance' },
-      { label: 'Financial Data Foundation', href: '/#data' }
+      { label: 'Banks & Lenders', href: '/banks-lenders' }
     ]
   },
   { label: 'Platform', href: '/platform' },

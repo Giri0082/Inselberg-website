@@ -13,6 +13,7 @@ import { LegalPage } from './pages/LegalPage.jsx';
 import { solutionPages } from './data/content.js';
 import { legalPages } from './data/legal.js';
 import { usePageReveal } from './hooks/usePageReveal.js';
+import { useDocumentSeo } from './hooks/useDocumentSeo.js';
 
 function normalizePath(pathname) {
   const clean = pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
@@ -29,6 +30,7 @@ function App() {
   const pendingHash = useRef('');
   const transitionTimer = useRef(null);
   usePageReveal(path, phase === 'enter');
+  useDocumentSeo(path);
 
   useEffect(() => {
     const onPopState = () => {

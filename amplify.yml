@@ -1,0 +1,18 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+# SPA rewrite: configure in Amplify Console → Hosting → Rewrites and redirects
+# using the rule in redirects.json (200 rewrite to /index.html for app routes).
